@@ -14,5 +14,5 @@ cqlsh -u cassandra -p cassandra -f /scripts/createAdmin.cql $CASSANDRA_IP $CASSA
 
 # Set Cassandra Admin password to a random string.
 RANDOM_PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-sed -i s/\<RANDOM_PASSWORD\>/$RANDOM_PASSWORD/g $1 /scripts/removeCassandraAdminSuperuser.cql
-cqlsh -u $CASSANDRA_ADMIN_USERNAME -p $CASSANDRA_ADMIN_PASSWORD -f /scripts/removeCassandraAdminSuperuser.cql $CASSANDRA_IP $CASSANDRA_PORT
+sed -i s/\<RANDOM_PASSWORD\>/$RANDOM_PASSWORD/g $1 /scripts/scrambleCassandraAdminPassword.cql
+cqlsh -u $CASSANDRA_ADMIN_USERNAME -p $CASSANDRA_ADMIN_PASSWORD -f /scripts/scrambleCassandraAdminPassword.cql $CASSANDRA_IP $CASSANDRA_PORT
